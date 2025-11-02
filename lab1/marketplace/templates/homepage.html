@@ -1,0 +1,24 @@
+<!-- homepage.html -->
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Книги для вас</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 40px; }
+        h1 { margin-bottom: 16px; }
+        ul { line-height: 1.8; }
+    </style>
+    </head>
+<body>
+    <h1>Книги для вас</h1>
+    <ul>
+    {% for book in recommendations %}
+        <li>{{ book.title }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
+
+
