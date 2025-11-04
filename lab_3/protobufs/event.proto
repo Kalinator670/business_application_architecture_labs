@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+message CheckAvailabilityRequest {
+  int32 event_id = 1;
+  int32 number_of_tickets = 2;
+}
+
+message EventInfo {
+  int32 event_id = 1;
+  string name = 2;
+  string date = 3;
+  string venue = 4;
+  double ticket_price = 5;
+}
+
+message CheckAvailabilityResponse {
+  bool available = 1;
+  int32 available_seats = 2;
+  EventInfo event = 3;
+}
+
+message ReserveSeatsRequest {
+  int32 event_id = 1;
+  int32 number_of_tickets = 2;
+  string booking_id = 3;
+}
+
+message ReserveSeatsResponse {
+  bool success = 1;
+  string message = 2;
+  repeated int32 seat_numbers = 3;
+}
+
+message ReleaseSeatsRequest {
+  int32 event_id = 1;
+  int32 number_of_tickets = 2;
+  string booking_id = 3;
+}
+
+message ReleaseSeatsResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service EventService {
+  rpc CheckAvailability (CheckAvailabilityRequest) returns (CheckAvailabilityResponse);
+  rpc ReserveSeats (ReserveSeatsRequest) returns (ReserveSeatsResponse);
+  rpc ReleaseSeats (ReleaseSeatsRequest) returns (ReleaseSeatsResponse);
+}
+

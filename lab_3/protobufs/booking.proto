@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+import "user.proto";
+import "event.proto";
+
+message CreateBookingRequest {
+  int32 user_id = 1;
+  int32 event_id = 2;
+  int32 number_of_tickets = 3;
+}
+
+message CreateBookingResponse {
+  int32 booking_id = 1;
+  string status = 2;
+  string message = 3;
+  string created_at = 4;
+}
+
+message GetBookingRequest {
+  int32 booking_id = 1;
+}
+
+message GetBookingResponse {
+  int32 booking_id = 1;
+  int32 user_id = 2;
+  int32 event_id = 3;
+  string status = 4;
+  int32 number_of_tickets = 5;
+  string created_at = 6;
+}
+
+message CancelBookingRequest {
+  int32 booking_id = 1;
+}
+
+message CancelBookingResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service BookingService {
+  rpc CreateBooking (CreateBookingRequest) returns (CreateBookingResponse);
+  rpc GetBooking (GetBookingRequest) returns (GetBookingResponse);
+  rpc CancelBooking (CancelBookingRequest) returns (CancelBookingResponse);
+}
+

@@ -1,0 +1,40 @@
+services:
+  user_service:
+    build:
+      context: .
+      dockerfile: user_service/Dockerfile
+    image: user_service
+    networks:
+      - microservices
+    ports:
+      - "50051:50051"
+
+  event_service:
+    build:
+      context: .
+      dockerfile: event_service/Dockerfile
+    image: event_service
+    networks:
+      - microservices
+    ports:
+      - "50052:50052"
+
+  booking_service:
+    build:
+      context: .
+      dockerfile: booking_service/Dockerfile
+    image: booking_service
+    environment:
+      USER_SERVICE_HOST: user_service
+      EVENT_SERVICE_HOST: event_service
+    networks:
+      - microservices
+    ports:
+      - "5000:5000"
+    depends_on:
+      - user_service
+      - event_service
+
+networks:
+  microservices:
+
